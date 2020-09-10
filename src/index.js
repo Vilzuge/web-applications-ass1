@@ -12,7 +12,7 @@ let XTurn = 1;
 
 function initializeCode() {
   createBoard(5, 5);
-  document.querySelectorAll("tr").forEach((button) => {
+  document.querySelectorAll("td").forEach((button) => {
     button.addEventListener("mousedown", (event) => {
       var selected = button.id;
       gameEvent(selected, button);
@@ -28,7 +28,7 @@ function createBoard(rows, columns) {
     let row = document.createElement("table");
     row.className = "rows";
     for (let j = 0; j < columns; j++) {
-      let cell = document.createElement("tr");
+      let cell = document.createElement("td");
       cell.className = "boardbutton";
       cell.setAttribute("id", "R" + i + "C" + j);
       cell.setAttribute("state", "blank");
