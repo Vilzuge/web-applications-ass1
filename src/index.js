@@ -12,7 +12,7 @@ let XTurn = 1;
 
 function initializeCode() {
   createBoard(5, 5);
-  document.querySelectorAll("button").forEach((button) => {
+  document.querySelectorAll("tr").forEach((button) => {
     button.addEventListener("mousedown", (event) => {
       var selected = button.id;
       gameEvent(selected, button);
@@ -25,16 +25,15 @@ function initializeCode() {
 
 function createBoard(rows, columns) {
   for (let i = 0; i < rows; i++) {
-    let row = document.createElement("div");
+    let row = document.createElement("table");
     row.className = "rows";
     for (let j = 0; j < columns; j++) {
-      let cell = document.createElement("button");
+      let cell = document.createElement("tr");
       cell.className = "boardbutton";
       cell.setAttribute("id", "R" + i + "C" + j);
       cell.setAttribute("state", "blank");
       cell.style.display = "inline-block";
       cell.style.fontSize = "40px";
-      cell.style.color = "transparent";
       cell.innerText = "[ ]";
       row.appendChild(cell);
     }
@@ -46,7 +45,6 @@ function resetBoard() {
   let buttons = document.getElementsByClassName("boardbutton");
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].innerText = "[ ]";
-    buttons[i].style.color = "transparent";
     buttons[i].setAttribute("state", "blank");
   }
 }
