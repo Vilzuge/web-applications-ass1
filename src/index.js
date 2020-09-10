@@ -41,14 +41,6 @@ function createBoard(rows, columns) {
   }
 }
 
-function resetBoard() {
-  let buttons = document.getElementsByClassName("boardbutton");
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].innerText = "[ ]";
-    buttons[i].setAttribute("state", "blank");
-  }
-}
-
 function checkWinner(selected, button) {
   let row = selected[1];
   let col = selected[3];
@@ -72,8 +64,14 @@ function checkWinner(selected, button) {
     }
   }
   if (won === true) {
-    alert(pressedState + " voitti.");
-    return;
+    if (pressedState === "X") {
+      alert("Player 1 won!");
+      return;
+    } else if (pressedState === "O") {
+      alert("Player 2 won!");
+    } else {
+      alert("Error! Nobody actually won...");
+    }
   }
 
   //Column winning condition
@@ -89,8 +87,14 @@ function checkWinner(selected, button) {
     }
   }
   if (won === true) {
-    alert(pressedState + " voitti.");
-    return;
+    if (pressedState === "X") {
+      alert("Player 1 won!");
+      return;
+    } else if (pressedState === "O") {
+      alert("Player 2 won!");
+    } else {
+      alert("Error! Nobody actually won...");
+    }
   }
 
   //Diagonal winning condition (top left to bottom right)
@@ -106,8 +110,14 @@ function checkWinner(selected, button) {
     }
   }
   if (won === true) {
-    alert(pressedState + " voitti.");
-    return;
+    if (pressedState === "X") {
+      alert("Player 1 won!");
+      return;
+    } else if (pressedState === "O") {
+      alert("Player 2 won!");
+    } else {
+      alert("Error! Nobody actually won...");
+    }
   }
 
   //Diagonal winning condition (bottom left to top right)
@@ -123,35 +133,36 @@ function checkWinner(selected, button) {
     }
   }
   if (won === true) {
-    alert(pressedState + " voitti.");
-    return;
+    if (pressedState === "X") {
+      alert("Player 1 won!");
+      return;
+    } else if (pressedState === "O") {
+      alert("Player 2 won!");
+    } else {
+      alert("Error! Nobody actually won...");
+    }
   }
 }
 
 function gameEvent(selected, button) {
-  if (selected === "reset") {
-    console.log("Resetting the board.");
-    resetBoard();
-  } else {
-    if (button.innerText === "[ ]") {
-      let turnIndicator = document.getElementById("turn");
-      if (XTurn === 1) {
-        console.log(selected + "---" + button.className);
-        button.style.color = "black";
-        button.innerText = "[X]";
-        button.setAttribute("state", "X");
-        turnIndicator.innerText = "O's turn.";
-        console.log(XTurn);
-      } else if (XTurn === -1) {
-        console.log(selected + "---" + button.className);
-        button.style.color = "black";
-        button.innerText = "[O]";
-        button.setAttribute("state", "O");
-        turnIndicator.innerText = "X's turn.";
-        console.log(XTurn);
-      }
-    } else {
-      XTurn = XTurn * -1;
+  if (button.innerText === "[ ]") {
+    let turnIndicator = document.getElementById("turn");
+    if (XTurn === 1) {
+      console.log(selected + "---" + button.className);
+      button.style.color = "black";
+      button.innerText = "[X]";
+      button.setAttribute("state", "X");
+      turnIndicator.innerText = "O's turn.";
+      console.log(XTurn);
+    } else if (XTurn === -1) {
+      console.log(selected + "---" + button.className);
+      button.style.color = "black";
+      button.innerText = "[O]";
+      button.setAttribute("state", "O");
+      turnIndicator.innerText = "X's turn.";
+      console.log(XTurn);
     }
+  } else {
+    XTurn = XTurn * -1;
   }
 }
