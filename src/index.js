@@ -58,6 +58,8 @@ function checkWinner(selected, button) {
   console.log("Painettu:" + pressedState);
   console.log("Rivi: " + row + " Sarake: " + col);
   console.log();
+
+  //Row winning condition
   for (let i = 0; i <= 4; i++) {
     if (
       document.getElementById("R" + row + "C" + i).getAttribute("state") ===
@@ -69,11 +71,12 @@ function checkWinner(selected, button) {
       break;
     }
   }
-
   if (won === true) {
     alert(pressedState + " voitti.");
+    return;
   }
 
+  //Column winning condition
   for (let j = 0; j <= 4; j++) {
     if (
       document.getElementById("R" + j + "C" + col).getAttribute("state") ===
@@ -85,12 +88,44 @@ function checkWinner(selected, button) {
       break;
     }
   }
-
   if (won === true) {
     alert(pressedState + " voitti.");
+    return;
   }
 
-  console.log(pressedState);
+  //Diagonal winning condition (top left to bottom right)
+  for (let j = 0; j <= 4; j++) {
+    if (
+      document.getElementById("R" + j + "C" + j).getAttribute("state") ===
+      pressedState
+    ) {
+      won = true;
+    } else {
+      won = false;
+      break;
+    }
+  }
+  if (won === true) {
+    alert(pressedState + " voitti.");
+    return;
+  }
+
+  //Diagonal winning condition (bottom left to top right)
+  for (let j = 0; j <= 4; j++) {
+    if (
+      document.getElementById("R" + j + "C" + (4 - j)).getAttribute("state") ===
+      pressedState
+    ) {
+      won = true;
+    } else {
+      won = false;
+      break;
+    }
+  }
+  if (won === true) {
+    alert(pressedState + " voitti.");
+    return;
+  }
 }
 
 function gameEvent(selected, button) {
